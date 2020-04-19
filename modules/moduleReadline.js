@@ -7,7 +7,11 @@ const rl = readLine.createInterface({
     output: process.stdout
 });
 rl.on('line', input => {
-    // if (commands[input]) return commands[input]();
+    if (commands[input]) return commands[input]();
+    if (!isNaN(parseInt(input, 10))) {
+        if (commands[Object.keys(commands)[parseInt(input, 10) - 1]])
+            return commands[Object.keys(commands)[parseInt(input, 10) - 1]]();
+    }
 
     switch (input) {
         case "cls":
@@ -15,9 +19,6 @@ rl.on('line', input => {
             break;
         case "test":
             serverSay("test has been completed");
-            break;
-        case "omgtu information":
-            commands.omgtuInformation();
             break;
         default:
             serverErr("unknown command");
